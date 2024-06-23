@@ -26,10 +26,7 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public IActionResult Add(Category obj)
         {
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("name", "A két mező nem egyezhet!!");
-            }
+          
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);

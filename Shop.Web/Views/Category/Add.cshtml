@@ -7,7 +7,6 @@
             <h2 class="text-black-50">Kategoria hozzáadása</h2>
             <hr />
         </div>
-        <div asp-validation-summary="All"></div>
         <div class="mb-3 row">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control"/>
@@ -34,3 +33,9 @@
            
     </div>
 </form>
+
+            @section Scripts {
+                @{
+    <partial name="_ValidationScriptsPartial" />
+                }
+            }
