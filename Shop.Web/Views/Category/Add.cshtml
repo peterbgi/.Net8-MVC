@@ -1,11 +1,13 @@
 ﻿@model Category
 
 <form method="post">
+
     <div class="border p-3 mt-3">
         <div class="row pb-3">
             <h2 class="text-black-50">Kategoria hozzáadása</h2>
             <hr />
         </div>
+        <div asp-validation-summary="All"></div>
         <div class="mb-3 row">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control"/>
