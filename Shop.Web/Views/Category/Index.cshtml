@@ -1,0 +1,22 @@
+﻿@model List<Category>
+
+
+<h1>Kategoriák</h1>
+<table class="table table-bordered table-striped">
+    <theade>
+        <tr>
+            <th>Kategoria név</th>
+            <th>Megjelenési sorrend</th>
+        </tr>
+    </theade>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+             <tr>
+                <td>@obj.Name</td>
+                <td>@obj.DisplayOrder</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

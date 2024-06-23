@@ -16,6 +16,7 @@ namespace Shop.Web.Controllers
         public IActionResult Index()
         {
             return View();
+            //home
         }
 
         public IActionResult Privacy()
