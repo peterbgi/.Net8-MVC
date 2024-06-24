@@ -1,4 +1,8 @@
 ﻿@model List<Category>
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
 
 
 <div class="container">
@@ -16,7 +20,7 @@
         <theade>
             <tr>
                 <th>Kategoria név</th>
-                <th>Megjelenési sorrend</th>
+                <th>Készleten lévő db</th>
                 <th></th>
             </tr>
         </theade>
