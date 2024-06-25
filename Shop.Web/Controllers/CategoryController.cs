@@ -63,7 +63,7 @@ namespace Shop.Web.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Kategoria sikeresen frissítve";
+                TempData["success"] = "Kategoria sikeresen törölve";
                 return RedirectToAction("Index");
             }
             return View();
