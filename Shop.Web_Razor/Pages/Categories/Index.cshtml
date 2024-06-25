@@ -1,0 +1,48 @@
+﻿@page
+@model Shop.Web_Razor.Pages.Categories.IndexModel
+@{
+}
+
+<div class="container">
+    <div class="row p-4">
+       <div class="col-6">
+           <h2 class="text-primary">Kategoriák</h2>
+       </div>
+        <div class="col-6 text-end">
+            <a asp-page="categories/add"  class="btn btn-danger">
+                <i class="bi bi-plus-circle mr-1"> Kategoria hozzáadása</i>
+            </a>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+        <theade>
+            <tr>
+                <th>Kategoria név</th>
+                <th>Készleten lévő db</th>
+                <th></th>
+            </tr>
+        </theade>
+        <tbody>
+            @foreach (var obj in Model.CategoryList.OrderBy(x => x.DisplayOrder))
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.DisplayOrder</td>
+                    <td>
+                        <div class="w-75" role="group">
+                            <a asp-page="category/edit" asp-route-id="@obj.Id" class="btn btn-warning mx-2 my-2">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <a asp-page="category/delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>
