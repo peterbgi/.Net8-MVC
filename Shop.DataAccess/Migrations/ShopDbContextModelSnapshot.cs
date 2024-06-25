@@ -7,7 +7,7 @@ using Shop.Web.Data;
 
 #nullable disable
 
-namespace Shop.Web.Migrations
+namespace Shop.DataAccess.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
     partial class ShopDbContextModelSnapshot : ModelSnapshot
@@ -34,7 +34,8 @@ namespace Shop.Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 

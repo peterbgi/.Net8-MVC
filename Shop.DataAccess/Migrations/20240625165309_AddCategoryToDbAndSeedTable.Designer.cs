@@ -8,11 +8,11 @@ using Shop.Web.Data;
 
 #nullable disable
 
-namespace Shop.Web.Migrations
+namespace Shop.DataAccess.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20240623100611_SeedCategoryTable")]
-    partial class SeedCategoryTable
+    [Migration("20240625165309_AddCategoryToDbAndSeedTable")]
+    partial class AddCategoryToDbAndSeedTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,8 @@ namespace Shop.Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
