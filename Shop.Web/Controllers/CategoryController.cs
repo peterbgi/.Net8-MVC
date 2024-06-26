@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.DataAccess.Repository.IRepository;
 using Shop.Web.Data;
 using Shop.Web.Models;
 
@@ -6,15 +7,15 @@ namespace Shop.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ShopDbContext _db;
+        private readonly ICategoryRepository _categoyRepository;
 
-        public CategoryController(ShopDbContext db)
+        public CategoryController(ICategoryRepository db)
         {
-            _db = db;
+            _categoyRepository = db;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _db.Categories.ToList();
+            List<Category> objCategoryList = _categoyRepository.GetAll().ToList();
             return View(objCategoryList);
         }
 
@@ -29,8 +30,8 @@ namespace Shop.Web.Controllers
           
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _categoyRepository.Add(obj);
+                _categoyRepository.Save();
                 TempData["success"] = "Kategoria sikeresen hozzáadva";
                 return RedirectToAction("Index");
             }
@@ -44,7 +45,9 @@ namespace Shop.Web.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFormDb = _db.Categories.Find(id); 
+            Category? categoryFormDb = _categoyRepository.Get(x => x.Id == id); 
+            
+            //Category? categoryFormDb2 = _db.Categories.Where(x => x.Id == id).FirstOrDefault(); 
 
             if (categoryFormDb == null)
             {
@@ -61,9 +64,9 @@ namespace Shop.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
-                TempData["success"] = "Kategoria sikeresen törölve";
+                _categoyRepository.Update(obj);
+                _categoyRepository.Save();
+                TempData["success"] = "Kategoria sikeresen frissítve";
                 return RedirectToAction("Index");
             }
             return View();
@@ -76,7 +79,7 @@ namespace Shop.Web.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFormDb = _db.Categories.Find(id);
+            Category? categoryFormDb = _categoyRepository.Get(x => x.Id == id);
 
             if (categoryFormDb == null)
             {
@@ -90,14 +93,14 @@ namespace Shop.Web.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Category? obj = _db.Categories.Find(id);
+            Category? obj = _categoyRepository.Get(x => x.Id == id);
             if (obj == null)
             {
                 NotFound();
             }
 
-            _db.Categories.Remove(obj);
-            _db.SaveChanges();
+            _categoyRepository.Remove(obj);
+            _categoyRepository.Save();
             TempData["success"] = "Kategoria sikeresen törölve";
             return RedirectToAction("Index");
 
