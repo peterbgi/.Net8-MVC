@@ -26,11 +26,18 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriák</a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Biztonság</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-black-50" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Megtekinhető tartalom
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li class="dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriák</a>
+                                </li>  
+                            </ul>
                         </li>
                     </ul>
                 </div>
