@@ -21,7 +21,7 @@ namespace Shop.DataAccess.Repository
 
             Category = new CategoryRepository(_db);
 
-            Product = new ProduczRepository(_db);   
+            Product = new ProductRepository(_db);   
         }
           
 

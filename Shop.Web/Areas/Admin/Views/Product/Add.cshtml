@@ -1,0 +1,82 @@
+﻿@using Shop.Models.Models
+ @model Product
+
+<div class="card shadow border-0 mt-4">
+    <div class="mt-0 py-3 card-header bg-secondary">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black-50 py-1">Termék hozzáadása</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3 mt-3">
+                <div class="mb-3 row">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <label asp-for="Desc"></label>
+                    <input asp-for="Desc" class="form-control" />
+                    <span asp-validation-for="Desc" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <label asp-for="ISBN"></label>
+                    <input asp-for="ISBN" class="form-control" />
+                    <span asp-validation-for="ISBN" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <label asp-for="Author"></label>
+                    <input asp-for="Author" class="form-control" />
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <label asp-for="ListPrice"></label>
+                    <input asp-for="ListPrice" class="form-control" />
+                    <span asp-validation-for="ListPrice" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <label asp-for="Price50"></label>
+                    <input asp-for="Price50" class="form-control" />
+                    <span asp-validation-for="Price50" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <label asp-for="Price100"></label>
+                    <input asp-for="Price100" class="form-control" />
+                    <span asp-validation-for="Price100" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger form-control">Hozzáad</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-primary form-control">
+                            Vissza a listához
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+            @section Scripts {
+                @{
+    <partial name="_ValidationScriptsPartial" />
+                }
+            } 

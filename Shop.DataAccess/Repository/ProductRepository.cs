@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Shop.DataAccess.Repository
 {
-    public class ProduczRepository : Repository<Product>, IProductRepository 
+    public class ProductRepository : Repository<Product>, IProductRepository 
     {
        private ShopDbContext _db;
 
-        public ProduczRepository(ShopDbContext db) : base(db) 
+        public ProductRepository(ShopDbContext db) : base(db) 
         {
                 
             _db = db;   
