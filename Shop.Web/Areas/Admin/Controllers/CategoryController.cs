@@ -3,8 +3,9 @@ using Shop.DataAccess.Repository.IRepository;
 using Shop.Web.Data;
 using Shop.Web.Models;
 
-namespace Shop.Web.Controllers
+namespace Shop.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -27,7 +28,7 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public IActionResult Add(Category obj)
         {
-          
+
             if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Add(obj);
@@ -36,7 +37,7 @@ namespace Shop.Web.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-           
+
         }
 
         public IActionResult Edit(int? id)
@@ -45,8 +46,8 @@ namespace Shop.Web.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFormDb = _unitOfWork.Category.Get(x => x.Id == id); 
-            
+            Category? categoryFormDb = _unitOfWork.Category.Get(x => x.Id == id);
+
             //Category? categoryFormDb2 = _db.Categories.Where(x => x.Id == id).FirstOrDefault(); 
 
             if (categoryFormDb == null)
