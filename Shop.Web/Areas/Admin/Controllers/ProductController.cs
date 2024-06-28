@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Shop.DataAccess.Repository.IRepository;
 using Shop.Models.Models;
+using Shop.Models.ViewModels;
 using Shop.Web.Data;
 using Shop.Web.Models;
 using System.Collections.Generic;
@@ -26,16 +27,17 @@ namespace Shop.Web.Areas.Admin.Controllers
 
         public IActionResult Add()
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(x => new SelectListItem
+            ProductViewModel viewModel = new()
             {
-                Text = x.Name,
-                Value = x.Id.ToString()
-            });
+                CategoryList = _unitOfWork.Category.GetAll().Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString()
+                }),
+                Product = new Product()
+            };
 
-            //ViewBag.CategoryList = CategoryList;
-            ViewData["CategoryList"] = CategoryList;
-
-            return View();
+            return View(viewModel);
         }
 
         [HttpPost]
