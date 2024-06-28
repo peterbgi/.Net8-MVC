@@ -41,18 +41,28 @@ namespace Shop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product obj)
+        public IActionResult Add(ProductViewModel productModel)
         {
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productModel.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Kategoria sikeresen hozzáadva";
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
 
+                productModel.CategoryList = _unitOfWork.Category.GetAll().Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString()
+                });
+                
+                return View(productModel);
+
+            }
         }
 
         public IActionResult Edit(int? id)
