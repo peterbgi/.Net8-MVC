@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shop.Web.Models
 {
     public class Category
     {
-        [Key]
+        [Key]   
         public int Id { get; set; }
 
         [Required]
@@ -16,5 +17,7 @@ namespace Shop.Web.Models
         [DisplayName("Megjelenítési sorrend")]
         [Range(1,100, ErrorMessage ="Valami nem jó!")]
         public int DisplayOrder { get; set; }
+
+      
     }
 }
