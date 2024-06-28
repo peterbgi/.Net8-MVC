@@ -60,6 +60,14 @@
                     <span asp-validation-for="Price100" class="text-danger"></span>
                 </div>
 
+                <div class="mb-3 row">
+                    <select asp-for="CategoryId" asp-items="@(ViewData["CategoryList"] as IEnumerable<SelectListItem>)"class="form-select">
+                        <option disabled selected>Kategoria választás</option>
+                    </select>    
+                    <label asp-for="CategoryId" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+
                 <div class="row">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-danger form-control">Hozzáad</button>

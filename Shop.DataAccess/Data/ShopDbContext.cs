@@ -34,7 +34,8 @@ namespace Shop.Web.Data
                    Price = 9000,
                    Price50 = 8500,
                    Price100 = 8000,
-                   CategoryId = 1
+                   CategoryId = 1,
+                   ImgUrl = ""
                },
                 new Product
                 {
@@ -47,7 +48,8 @@ namespace Shop.Web.Data
                     Price = 3000,
                     Price50 = 2500,
                     Price100 = 2000,
-                    CategoryId = 1
+                    CategoryId = 1,
+                    ImgUrl = ""
                 },
                 new Product
                 {
@@ -60,7 +62,8 @@ namespace Shop.Web.Data
                     Price = 5000,
                     Price50 = 4000,
                     Price100 = 3500,
-                    CategoryId = 2
+                    CategoryId = 2,
+                    ImgUrl = ""
                 },
                 new Product
                 {
@@ -73,7 +76,8 @@ namespace Shop.Web.Data
                     Price = 6500,
                     Price50 = 6000,
                     Price100 = 5500,
-                    CategoryId = 2
+                    CategoryId = 2,
+                    ImgUrl = ""
                 },
                 new Product
                 {
@@ -86,7 +90,8 @@ namespace Shop.Web.Data
                     Price = 2700,
                     Price50 = 2500,
                     Price100 = 2000,
-                    CategoryId = 3
+                    CategoryId = 3,
+                    ImgUrl = ""
                 },
                 new Product
                 {
@@ -99,7 +104,8 @@ namespace Shop.Web.Data
                     Price = 2300,
                     Price50 = 2200,
                     Price100 = 2000,
-                    CategoryId = 3
+                    CategoryId = 3,
+                    ImgUrl = ""
                 }
 
                 );

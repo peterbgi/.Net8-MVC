@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Shop.DataAccess.Repository.IRepository;
 using Shop.Models.Models;
 using Shop.Web.Data;
 using Shop.Web.Models;
+using System.Collections.Generic;
 
 namespace Shop.Web.Areas.Admin.Controllers
 {
@@ -18,11 +20,21 @@ namespace Shop.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            
             return View(objProductList);
         }
 
         public IActionResult Add()
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
+
+            //ViewBag.CategoryList = CategoryList;
+            ViewData["CategoryList"] = CategoryList;
+
             return View();
         }
 
