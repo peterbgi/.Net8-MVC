@@ -5,12 +5,13 @@
     <div class="mt-0 py-3 card-header bg-secondary">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-black-50 py-1">Termék hozzáadása</h2>
+                <h2 class="text-black-50 py-1"> @(Model.Product.Id != 0 ? "Szerkeszt" : "Hozzáad") Termék</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Product.Id" hidden />
             <div class="border p-3 mt-3">
                 <div class="mb-3 row">
                     <label asp-for="Product.Title"></label>
@@ -70,8 +71,8 @@
 
                 <div class="mb-3 row">
                     <label asp-for="Product.ImgUrl"></label>
-                    <input asp-for="Product.ImgUrl" class="form-control" />
-                    <span asp-validation-for="Product.ImgUrl" class="text-danger"></span>
+                    <input type="file" class="form-control" />
+                   
                 </div>
 
                 <div class="row">
