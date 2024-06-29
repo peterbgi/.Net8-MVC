@@ -14,9 +14,12 @@ namespace Shop.Web.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;  
+        
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;   
         }
         public IActionResult Index()
         {
@@ -50,11 +53,24 @@ namespace Shop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductViewModel productModel, IFormFile file)
+        public IActionResult Upsert(ProductViewModel productModel, IFormFile file, ProductViewModel productViewModel)
         {
 
             if (ModelState.IsValid)
             {
+                string www = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(www, @"images\product");
+
+                    using (var sr = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(sr);
+                    }
+
+                    productViewModel.Product.ImgUrl = @"\images\product\" + fileName;
+                }
                 _unitOfWork.Product.Add(productModel.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Kategoria sikeresen hozzáadva";
