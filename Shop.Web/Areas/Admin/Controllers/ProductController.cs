@@ -23,7 +23,7 @@ namespace Shop.Web.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProp: "Category").ToList();
             
             return View(objProductList);
         }
@@ -63,7 +63,16 @@ namespace Shop.Web.Areas.Admin.Controllers
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(www, @"images\product");
+                    if (!string.IsNullOrEmpty(productViewModel.Product.ImgUrl))
+                    {
+                        //remove old img
+                        var oldImg = Path.Combine(www, productViewModel.Product.ImgUrl.TrimStart('\\'));
 
+                        if (System.IO.File.Exists(oldImg))
+                        {
+                            System.IO.File.Delete(oldImg);
+                        }
+                    }
                     using (var sr = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(sr);
@@ -71,7 +80,17 @@ namespace Shop.Web.Areas.Admin.Controllers
 
                     productViewModel.Product.ImgUrl = @"\images\product\" + fileName;
                 }
-                _unitOfWork.Product.Add(productViewModel.Product);
+
+                if (productViewModel.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(productViewModel.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(productViewModel.Product);
+                }
+
+                
                 _unitOfWork.Save();
                 TempData["success"] = "Kategoria sikeresen hozzáadva";
                 return RedirectToAction("Index");
@@ -124,7 +143,6 @@ namespace Shop.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
-
 
     }
 }

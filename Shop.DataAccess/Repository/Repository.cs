@@ -20,7 +20,8 @@ namespace Shop.DataAccess.Repository
         public Repository(ShopDbContext db)
         {
             _db = db;
-            this.dbSet = _db.Set<T>();  
+            this.dbSet = _db.Set<T>();
+            _db.Products.Include(x => x.Category).Include(x => x.CategoryId);
         }
 
         public void Add(T enitiy)
@@ -28,18 +29,36 @@ namespace Shop.DataAccess.Repository
            dbSet.Add(enitiy);
         }
 
-        public T Get(Expression<Func<T, bool>> fiter)
+        public T Get(Expression<Func<T, bool>> fiter, string? includeProp = null)
         {
             IQueryable<T> query = dbSet;
 
             query = query.Where(fiter);
 
+            if (!string.IsNullOrEmpty(includeProp))
+            {
+                foreach (var prop in includeProp
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(prop);
+                }
+            }
+
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProp = null)
         {
             IQueryable<T> query = dbSet;
+
+            if (!string.IsNullOrEmpty(includeProp))
+            {
+                foreach (var prop in includeProp
+                    .Split(new char[] { ','},StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(prop);    
+                }
+            }
 
             return query.ToList();
         }
