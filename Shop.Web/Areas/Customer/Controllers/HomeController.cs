@@ -1,23 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
+using Shop.DataAccess.Repository.IRepository;
+using Shop.Models.Models;
 using Shop.Web.Models;
 using System.Diagnostics;
 
-namespace Shop.Web.Areas.Customer.Controllers
+namespace BulkyBookWeb.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
-            //home
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProp: "Category");
+            return View(productList);
+        }
+
+        public IActionResult Details(int productId)
+        {
+            Product product = _unitOfWork.Product.Get(u => u.Id == productId, includeProp: "Category");
+            return View(product);
         }
 
         public IActionResult Privacy()

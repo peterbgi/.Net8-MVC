@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ShopDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); 
+builder.Services.AddScoped<IUnitOfWork, _unitOfWork>(); 
 
 var app = builder.Build();
 

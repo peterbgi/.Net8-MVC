@@ -1,8 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Kezdőoldal";
-}
+﻿@using Shop.Models.Models
+@model IEnumerable<Product>
 
-<div class="text-center">
-    <h1 class="display-4">Üdvözlet az oldalunkon!</h1>
-    <p><a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc">Ide kattintva többet megtudhatsz az általunk használt tecnologiáról</a>.</p>
+    <div class="row pb-3">
+        @foreach(var p in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow border-top bordder-3 rounded bg-dark">
+                        <img src="@p.ImgUrl" class="card-img-top rounded" />
+
+                        <div class="card-body pb-0 ">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-white bg-dark text-uppercase text-center rounded p-1">@p.Title</p>
+                                <p class="card-title h5 text-white bg-danger text-center rounded p-1">by <strong>@p.Author</strong></p>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

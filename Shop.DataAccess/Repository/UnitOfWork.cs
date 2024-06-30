@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Shop.DataAccess.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public class _unitOfWork : IUnitOfWork
     {
         private ShopDbContext _db;
 
         public ICategoryRepository Category { get; private set; }
         public IProductRepository Product { get; private set; }
-        public UnitOfWork(ShopDbContext db) 
+        public _unitOfWork(ShopDbContext db) 
         {
 
             _db = db;
