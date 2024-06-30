@@ -53,7 +53,7 @@ namespace Shop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductViewModel productModel, IFormFile file, ProductViewModel productViewModel)
+        public IActionResult Upsert(ProductViewModel productModel, IFormFile? file, ProductViewModel productViewModel)
         {
 
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace Shop.Web.Areas.Admin.Controllers
 
                     productViewModel.Product.ImgUrl = @"\images\product\" + fileName;
                 }
-                _unitOfWork.Product.Add(productModel.Product);
+                _unitOfWork.Product.Add(productViewModel.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Kategoria sikeresen hozzáadva";
                 return RedirectToAction("Index");
