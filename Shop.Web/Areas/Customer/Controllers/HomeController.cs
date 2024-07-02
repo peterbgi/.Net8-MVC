@@ -24,10 +24,10 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
             return View(productList);
         }
 
-        public IActionResult Details(int productId)
+        public IActionResult Details(int id)
         {
-            Product product = _unitOfWork.Product.Get(u => u.Id == productId, includeProp: "Category");
-            return View(product);
+            Product prod = _unitOfWork.Product.Get(u => u.Id == id, includeProp: "Category");
+            return View(prod);
         }
 
         public IActionResult Privacy()
