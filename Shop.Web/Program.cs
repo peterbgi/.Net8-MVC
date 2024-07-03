@@ -15,6 +15,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")))
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ShopDbContext>();
 
+builder.Services.AddRazorPages();
+
 builder.Services.AddScoped<IUnitOfWork, _unitOfWork>(); 
 
 
@@ -34,6 +36,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
